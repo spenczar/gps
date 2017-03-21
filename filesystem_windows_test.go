@@ -32,7 +32,7 @@ func (fs filesystemState) setup(t *testing.T) {
 		// On Windows, relative symlinks confuse filepath.Walk. This is golang/go
 		// issue 17540. So, we'll just sigh and do absolute links, assuming they are
 		// relative to the directory of link.path.
-		dir := filepath.Dir(link.path.String())
+		dir := filepath.Dir(p.String())
 		to := filepath.Join(dir, link.to)
 
 		if err := os.Symlink(to, p.String()); err != nil {
