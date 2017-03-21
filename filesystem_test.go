@@ -71,7 +71,7 @@ func (fs filesystemState) assert(t *testing.T) {
 		linkMap[l.path.prepend(fs.root).String()] = struct{}{}
 	}
 
-	filepath.Walk(fs.root, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(fs.root, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			t.Errorf("filepath.Walk path=%q  err=%q", path, err)
 			return err
@@ -111,6 +111,10 @@ func (fs filesystemState) assert(t *testing.T) {
 		}
 		return nil
 	})
+
+	if err != nil {
+		t.Errorf("filesystem.Walk err=%q", err)
+	}
 
 	for d := range dirMap {
 		t.Errorf("could not find expected directory %q", d)
