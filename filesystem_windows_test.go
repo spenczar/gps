@@ -1,3 +1,5 @@
+// +build windows
+
 package gps
 
 import (
@@ -5,8 +7,6 @@ import (
 	"path/filepath"
 	"testing"
 )
-
-// +build windows
 
 // setup inflates fs onto the actual host file system
 func (fs filesystemState) setup(t *testing.T) {
